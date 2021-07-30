@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[44]:
+# In[63]:
 
 
 import csv
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+import random
 
 
 # In[19]:
@@ -27,10 +28,10 @@ next(data)
 ls = list(data)
 
 
-# In[27]:
+# In[49]:
 
 
-print([i for i in ls])
+#print([i for i in ls])
 
 
 # In[ ]:
@@ -52,13 +53,13 @@ def save_highest_temperatures(self):
 """
 
 
-# In[26]:
+# In[51]:
 
 
-print([i[-1] for i in ls])
+#print([i[-1] for i in ls])
 
 
-# In[34]:
+# In[50]:
 
 
 highest_temperatures = []
@@ -102,20 +103,38 @@ plt.plot(high,'hotpink', label='high')
 plt.plot(low, 'skyblue',label='low')
 
 
-# In[ ]:
+# In[64]:
 
 
+arr = []
+[arr.append(random.randint(1, 1000))for i in range(13)]
+plt.boxplot(arr)
+plt.show()
 
 
-
-# In[ ]:
-
+# In[66]:
 
 
+month = [[], [], [], [], [], [], [], [], [], [], [], []]
+# for i in arr:
+#     if i[-1] != '':
+#         month[int(i[0].split('-')[1])-1].append(float(i[-1]))
+[month[int(i[0].split('-')[1]) - 1].append(float(i[-1])) for i in ls if i[-1] != '']
+plt.boxplot(month)
+plt.show()
 
 
-# In[ ]:
+# In[68]:
 
 
-
+day = []
+[day.append([]) for i in range(31)]
+[day[int(i[0].split('-')[2]) -1].append(float(i[-1]))
+     for i in ls
+        if i[-1] != ''
+            if i[0].split('-')[1] == '08']
+plt.style.use('ggplot') # Graph Style
+plt.figure(figsize=(10, 5), dpi=300) # Graph Size
+plt.boxplot(day, showfliers=False) # Omit Outlier
+plt.show()
 
